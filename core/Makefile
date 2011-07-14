@@ -1267,11 +1267,7 @@ INTERNAL_OTA_PACKAGE_TARGET := $(PRODUCT_OUT)/$(name).zip
 
 $(INTERNAL_OTA_PACKAGE_TARGET): KEY_CERT_PAIR := $(DEFAULT_KEY_CERT_PAIR)
 
-ifdef CYANOGEN_WITH_GOOGLE
-$(INTERNAL_OTA_PACKAGE_TARGET): backuptool := false
-else
 $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := true
-endif
 
 ifeq ($(TARGET_OTA_ASSERT_DEVICE),)
 $(INTERNAL_OTA_PACKAGE_TARGET): override_device := auto
@@ -1305,15 +1301,10 @@ name := $(TARGET_PRODUCT)
 ifeq ($(TARGET_BUILD_TYPE),debug)
   name := $(name)_debug
 endif
-ifeq ($(TARGET_NO_RECOVERY),true)
-    TARGET_OTA_NO_RECOVERY := true
-endif
-ifeq ($(TARGET_OTA_NO_RECOVERY),)
-# default to "false"
-$(INTERNAL_OTA_PACKAGE_TARGET): recoveryex := false
+
+$(INTERNAL_OTA_PACKAGE_TARGET): recoveryex := true
 else
-$(INTERNAL_OTA_PACKAGE_TARGET): recoveryex := $(TARGET_OTA_NO_RECOVERY)
-endif
+
 name := $(name)-img-$(FILE_NAME_TAG)
 
 INTERNAL_UPDATE_PACKAGE_TARGET := $(PRODUCT_OUT)/$(name).zip
