@@ -31,9 +31,9 @@ PRODUCT_PACKAGES := \
     Email \
     Gallery3D \
     LatinIME \
-    Launcher2 \
     Mms \
     Music \
+    OMFGB-Launcher \
     Provision \
     Protips \
     QuickSearchBox \
